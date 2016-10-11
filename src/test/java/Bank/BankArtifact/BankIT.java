@@ -57,7 +57,21 @@ public class BankIT {
 	@Test
 	public void testTransactionBetweenUsers() {
 		// use the functions transfer(Client,Client,float) & getClientByName(String) from Bank
-		assertTrue(false);
+		Client melo = bank.getClientByName("Melo");
+		Client rui = bank.getClientByName("Rui");
+
+		assertEquals(melo.getName(), "Melo");
+		assertEquals(rui.getName(), "Rui");
+
+		float amountDeposited = 100;
+		float transferAmount = 25;
+
+		bank.depositAccount(melo, amountDeposited);
+
+		bank.transfer(melo, rui, transferAmount);
+
+		assertEquals(melo.getAccount().getAmount(), amountDeposited - transferAmount, floatTolerance);
+		assertEquals(rui.getAccount().getAmount(), transferAmount, floatTolerance);
 	}
 
 }
